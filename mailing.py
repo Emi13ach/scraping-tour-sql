@@ -4,19 +4,20 @@ import smtplib
 from email.message import EmailMessage
 
 
-def send_email(content):
-    HOST = "smtp.gmail.com"
-    PORT = 465
-    USERNAME = "eb.pythoncode@gmail.com"
-    PASSWORD = os.getenv("GMAIL_PASSWORD")
-    RECEIVER = 'eb.pythoncode@gmail.com'
+class Email:
+    def send(self, content):
+        HOST = "smtp.gmail.com"
+        PORT = 465
+        USERNAME = "eb.pythoncode@gmail.com"
+        PASSWORD = os.getenv("GMAIL_PASSWORD")
+        RECEIVER = 'eb.pythoncode@gmail.com'
 
-    email_message = EmailMessage()
-    email_message["Subject"] = "Next tour"
-    email_message.set_content(content)
+        email_message = EmailMessage()
+        email_message["Subject"] = "Next tour"
+        email_message.set_content(content)
 
-    context = ssl.create_default_context()
+        context = ssl.create_default_context()
 
-    with smtplib.SMTP_SSL(host=HOST, port=PORT, context=context) as server:
-        server.login(USERNAME, PASSWORD)
-        server.sendmail(USERNAME, RECEIVER, email_message.as_string())
+        with smtplib.SMTP_SSL(host=HOST, port=PORT, context=context) as server:
+            server.login(USERNAME, PASSWORD)
+            server.sendmail(USERNAME, RECEIVER, email_message.as_string())
